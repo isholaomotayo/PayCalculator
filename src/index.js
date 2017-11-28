@@ -152,7 +152,7 @@ class App extends React.Component {
 
     return (
       <div style={styles}>
-        <Hello name="Pay Calculator 📱" />
+        <Hello name="Strongs Pay Calculator 📱" />
         <div className="result">
           <h1> Your Recommended Pay is </h1>
           <h2>&#8358; {Total}</h2>
