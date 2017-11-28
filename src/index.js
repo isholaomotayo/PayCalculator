@@ -416,7 +416,7 @@ class App extends React.Component {
         <br />
         <div className="form-group">
           <input
-            type="text"
+            type="number"
             value={Gross_Pay_Of_Subordinate}
             onChange={this.handleChangeGross}
             required="required"
@@ -429,7 +429,7 @@ class App extends React.Component {
 
         <div className="form-group">
           <input
-            type="text"
+            type="number"
             required="required"
             value={Bonus}
             onChange={this.handleChangeBonus}
