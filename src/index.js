@@ -83,13 +83,13 @@ class App extends React.Component {
         ]
       }
     ],
-    Gross_Pay_Of_Subordinate: [],
+    Gross_Pay_Of_Subordinate: "",
     AdHoc_Task: [
       { Tactical: 30000 },
       { Operational: 50000 },
       { Strategic: 100000 }
     ],
-    Bonus: [],
+    Bonus: "",
     TotalPR: 0,
     TotalOwnership: 0,
     YOEValue: 0,
@@ -101,6 +101,10 @@ class App extends React.Component {
     ICT: 0,
     Ops: 0
   };
+
+
+  handleChangeGross = (event) => this.setState({ Gross_Pay_Of_Subordinate: event.target.value })
+  handleChangeBonus= (event )=>this.setState({ Bonus: event.target.value})
 
   range(start, stop, step) {
     var result = [];
@@ -132,31 +136,37 @@ class App extends React.Component {
       Ops
     } = this.state;
 
+
+    let Total = parseFloat(TotalPR) +
+      parseFloat(TotalOwnership) +
+      parseFloat(YOEValue) +
+      parseFloat(ADHocValue) +
+      parseFloat(DoRValue) +
+      parseFloat(Sales) +
+      parseFloat(Finance) +
+      parseFloat(HR_Admin) +
+      parseFloat(ICT) +
+      parseFloat(Bonus*1) +
+      parseFloat(Gross_Pay_Of_Subordinate*0.25) +
+      parseFloat(Ops)
+
     return (
       <div style={styles}>
         <Hello name="Pay Calculator 📱" />
+        <div className="result">
         <h1> Your Recommended Pay is </h1>
-        <h2>
-          {" "}
-           &#8358; {" "}
-          {parseFloat(TotalPR) +
-            parseFloat(TotalOwnership) +
-            parseFloat(YOEValue) +
-            parseFloat(ADHocValue) +
-            parseFloat(DoRValue) +
-            parseFloat(Sales) +
-            parseFloat(Finance) +
-            parseFloat(HR_Admin) +
-            parseFloat(ICT) +
-            parseFloat(Ops)}
+        <h2 >          
+          &#8358; {Total}
         </h2>
+        </div>
 
         <div className="metric">
           <div className="content-box">
+            <div style={{ display: "inline-block", width: "100%", marginTop:"15px" }}>
             <h2> Performance Review </h2>
 
             {Performance_Review.map((metric, i) => (
-              <div class="inputGroup" key={i}>
+              <div className="inputGroup" key={i}>
                 <input
                   id={Object.keys(metric)}
                   name="Performance_Review"
@@ -169,15 +179,19 @@ class App extends React.Component {
                 <label htmlFor={Object.keys(metric)}>
                   {Object.keys(metric)}
                 </label>
+                
               </div>
             ))}
+            
+          </div>
           </div>
 
           <div className="content-box">
+            <div style={{ display: "inline-block", width: "100%" }}>
             <h2> Ownership </h2>
 
             {Ownership.map((metric, i) => (
-              <div class="inputGroup" key={i}>
+              <div className="inputGroup" key={i}>
                 <input
                   id={Object.keys(metric) + "ownership"}
                   name="Ownership"
@@ -193,13 +207,14 @@ class App extends React.Component {
               </div>
             ))}
           </div>
+          </div >
         </div>
 
         <div>
           <h2> Years of experience </h2>
           <div id="yoe">
             {Years_Of_Experience.map((metric, i) => (
-              <div class="inputGroup noBg" key={i}>
+              <div className="inputGroup noBg" key={i}>
                 <input
                   id={metric + "yoe"}
                   name="Years_Of_Experience"
@@ -215,12 +230,13 @@ class App extends React.Component {
           </div>
         </div>
 
-        <div className="metric" style={{ marginTop: "40px" }}>
+        <div className="metric" style={{ marginTop: "20px" }}>
           <div className="content-box">
+            <div style={{ display: "inline-block", width: "100%", marginTop: "15px" }}>
             <h2> Degree Of Responsibility </h2>
 
             {Degree_Of_Responsibility.map((metric, i) => (
-              <div class="inputGroup" key={i}>
+              <div className="inputGroup" key={i}>
                 <input
                   id={Object.keys(metric)}
                   name="DoR"
@@ -236,13 +252,15 @@ class App extends React.Component {
               </div>
             ))}
           </div>
-          <br />
+          </div>
+         
 
           <div className="content-box">
+            <div style={{ display: "inline-block", width: "100%" }}>
             <h2> Ad hoc Tasks </h2>
 
             {AdHoc_Task.map((metric, i) => (
-              <div class="inputGroup" key={i}>
+              <div className="inputGroup" key={i}>
                 <input
                   id={Object.values(metric) + "adhoc"}
                   name="ADhoc"
@@ -257,7 +275,8 @@ class App extends React.Component {
                 </label>
               </div>
             ))}
-            <br />
+            
+            </div>
           </div>
         </div>
 
@@ -265,12 +284,12 @@ class App extends React.Component {
 
         <br />
         <h2> Nature of work </h2>
-        <div className="metric3" style={{ marginTop: "40px" }}>
+        <div className="metric" style={{ marginTop: "40px" }}>
           <div className="content-box">
-            <div style={{ display: "inline-block", width: "100%" }}>
+            <div style={{ display: "inline-block", width: "100%", marginTop:"18px" }}>
               <h2> Sales </h2>
               {Nature_Of_Work[0]["Sales"].map((metric, i) => (
-                <div class="inputGroup" key={i}>
+                <div className="inputGroup" key={i}>
                   <input
                     id={Object.values(metric) + "Sales"}
                     name="Sales"
@@ -293,8 +312,7 @@ class App extends React.Component {
             <div style={{ display: "inline-block", width: "100%" }}>
               <h2> Operations </h2>
               {Nature_Of_Work[1]["Operations"].map((metric, i) => (
-                <div class="inputGroup" key={i}>
-                  
+                <div className="inputGroup" key={i}>
                   <input
                     id={Object.values(metric) + "Operations"}
                     name="Operations"
@@ -317,7 +335,7 @@ class App extends React.Component {
             <div style={{ display: "inline-block", width: "100%" }}>
               <h2> Finance </h2>
               {Nature_Of_Work[2]["Finance"].map((metric, i) => (
-                <div class="inputGroup" key={i}>
+                <div className="inputGroup" key={i}>
                   <input
                     id={Object.values(metric) + "Finance"}
                     name="Finance"
@@ -340,7 +358,7 @@ class App extends React.Component {
             <div style={{ display: "inline-block", width: "100%" }}>
               <h2> HR/Admin </h2>
               {Nature_Of_Work[3]["HR_Admin"].map((metric, i) => (
-                <div class="inputGroup" key={i}>
+                <div className="inputGroup" key={i}>
                   <input
                     id={Object.values(metric) + "HR_Admin"}
                     name="HR_Admin"
@@ -363,7 +381,7 @@ class App extends React.Component {
             <div>
               <h2> ICT </h2>
               {Nature_Of_Work[4]["ICT"].map((metric, i) => (
-                <div class="inputGroup" key={i}>
+                <div className="inputGroup" key={i}>
                   <input
                     id={Object.values(metric) + "ICT"}
                     name="ICT"
@@ -384,7 +402,16 @@ class App extends React.Component {
         </div>
 
         <br />
-      </div>
+        <div className="form-group">
+          <input type="text"  value={Gross_Pay_Of_Subordinate} onChange={this.handleChangeGross}  required="required" />
+          <label className="control-label" htmlFor="input">Gross Pay Of Subordinate</label><i className="bar"></i>
+        </div>
+
+        <div className="form-group" >
+          <input type="text" required="required" value={Bonus} onChange={ this.handleChangeBonus} />
+          <label className="control-label" htmlFor="input">Bonus</label><i className="bar"></i>
+        </div>
+        </div>
     );
   }
 }
