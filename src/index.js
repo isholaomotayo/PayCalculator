@@ -102,9 +102,9 @@ class App extends React.Component {
     Ops: 0
   };
 
-
-  handleChangeGross = (event) => this.setState({ Gross_Pay_Of_Subordinate: event.target.value })
-  handleChangeBonus= (event )=>this.setState({ Bonus: event.target.value})
+  handleChangeGross = event =>
+    this.setState({ Gross_Pay_Of_Subordinate: event.target.value });
+  handleChangeBonus = event => this.setState({ Bonus: event.target.value });
 
   range(start, stop, step) {
     var result = [];
@@ -136,8 +136,8 @@ class App extends React.Component {
       Ops
     } = this.state;
 
-
-    let Total = parseFloat(TotalPR) +
+    let Total =
+      parseFloat(TotalPR) +
       parseFloat(TotalOwnership) +
       parseFloat(YOEValue) +
       parseFloat(ADHocValue) +
@@ -146,68 +146,71 @@ class App extends React.Component {
       parseFloat(Finance) +
       parseFloat(HR_Admin) +
       parseFloat(ICT) +
-      parseFloat(Bonus*1) +
-      parseFloat(Gross_Pay_Of_Subordinate*0.20) +
-      parseFloat(Ops)
+      parseFloat(Bonus * 1) +
+      parseFloat(Gross_Pay_Of_Subordinate * 0.2) +
+      parseFloat(Ops);
 
     return (
       <div style={styles}>
         <Hello name="Pay Calculator 📱" />
         <div className="result">
-        <h1> Your Recommended Pay is </h1>
-        <h2 >          
-          &#8358; {Total}
-        </h2>
+          <h1> Your Recommended Pay is </h1>
+          <h2>&#8358; {Total}</h2>
+          <br />
         </div>
 
         <div className="metric">
           <div className="content-box">
-            <div style={{ display: "inline-block", width: "100%", marginTop:"15px" }}>
-            <h2> Performance Review </h2>
+            <div
+              style={{
+                display: "inline-block",
+                width: "100%",
+                marginTop: "15px"
+              }}
+            >
+              <h2> Performance Review </h2>
 
-            {Performance_Review.map((metric, i) => (
-              <div className="inputGroup" key={i}>
-                <input
-                  id={Object.keys(metric)}
-                  name="Performance_Review"
-                  type="radio"
-                  value={Object.values(metric)}
-                  onClick={metic => {
-                    this.setState({ TotalPR: Object.values(metric) });
-                  }}
-                />
-                <label htmlFor={Object.keys(metric)}>
-                  {Object.keys(metric)}
-                </label>
-                
-              </div>
-            ))}
-            
-          </div>
+              {Performance_Review.map((metric, i) => (
+                <div className="inputGroup" key={i}>
+                  <input
+                    id={Object.keys(metric)}
+                    name="Performance_Review"
+                    type="radio"
+                    value={Object.values(metric)}
+                    onClick={metic => {
+                      this.setState({ TotalPR: Object.values(metric) });
+                    }}
+                  />
+                  <label htmlFor={Object.keys(metric)}>
+                    {Object.keys(metric)}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="content-box">
             <div style={{ display: "inline-block", width: "100%" }}>
-            <h2> Ownership </h2>
+              <h2> Ownership </h2>
 
-            {Ownership.map((metric, i) => (
-              <div className="inputGroup" key={i}>
-                <input
-                  id={Object.keys(metric) + "ownership"}
-                  name="Ownership"
-                  type="radio"
-                  value={Object.values(metric)}
-                  onClick={metic => {
-                    this.setState({ TotalOwnership: Object.values(metric) });
-                  }}
-                />
-                <label htmlFor={Object.keys(metric) + "ownership"}>
-                  {Object.keys(metric)}
-                </label>
-              </div>
-            ))}
+              {Ownership.map((metric, i) => (
+                <div className="inputGroup" key={i}>
+                  <input
+                    id={Object.keys(metric) + "ownership"}
+                    name="Ownership"
+                    type="radio"
+                    value={Object.values(metric)}
+                    onClick={metic => {
+                      this.setState({ TotalOwnership: Object.values(metric) });
+                    }}
+                  />
+                  <label htmlFor={Object.keys(metric) + "ownership"}>
+                    {Object.keys(metric)}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
-          </div >
         </div>
 
         <div>
@@ -232,50 +235,53 @@ class App extends React.Component {
 
         <div className="metric" style={{ marginTop: "20px" }}>
           <div className="content-box">
-            <div style={{ display: "inline-block", width: "100%", marginTop: "15px" }}>
-            <h2> Degree Of Responsibility </h2>
+            <div
+              style={{
+                display: "inline-block",
+                width: "100%"
+              }}
+            >
+              <h2> Degree Of Responsibility </h2>
 
-            {Degree_Of_Responsibility.map((metric, i) => (
-              <div className="inputGroup" key={i}>
-                <input
-                  id={Object.keys(metric)}
-                  name="DoR"
-                  type="radio"
-                  value={Object.values(metric)}
-                  onClick={metic => {
-                    this.setState({ DoRValue: Object.values(metric) });
-                  }}
-                />
-                <label htmlFor={Object.keys(metric)}>
-                  {Object.keys(metric)}
-                </label>
-              </div>
-            ))}
+              {Degree_Of_Responsibility.map((metric, i) => (
+                <div className="inputGroup" key={i}>
+                  <input
+                    id={Object.keys(metric)}
+                    name="DoR"
+                    type="radio"
+                    value={Object.values(metric)}
+                    onClick={metic => {
+                      this.setState({ DoRValue: Object.values(metric) });
+                    }}
+                  />
+                  <label htmlFor={Object.keys(metric)}>
+                    {Object.keys(metric)}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
-          </div>
-         
 
           <div className="content-box">
             <div style={{ display: "inline-block", width: "100%" }}>
-            <h2> Ad hoc Tasks </h2>
+              <h2> Ad hoc Tasks </h2>
 
-            {AdHoc_Task.map((metric, i) => (
-              <div className="inputGroup" key={i}>
-                <input
-                  id={Object.values(metric) + "adhoc"}
-                  name="ADhoc"
-                  type="radio"
-                  value={Object.values(metric)}
-                  onClick={metic => {
-                    this.setState({ ADHocValue: Object.values(metric) });
-                  }}
-                />
-                <label htmlFor={Object.values(metric) + "adhoc"}>
-                  {Object.keys(metric)}
-                </label>
-              </div>
-            ))}
-            
+              {AdHoc_Task.map((metric, i) => (
+                <div className="inputGroup" key={i}>
+                  <input
+                    id={Object.values(metric) + "adhoc"}
+                    name="ADhoc"
+                    type="radio"
+                    value={Object.values(metric)}
+                    onClick={metic => {
+                      this.setState({ ADHocValue: Object.values(metric) });
+                    }}
+                  />
+                  <label htmlFor={Object.values(metric) + "adhoc"}>
+                    {Object.keys(metric)}
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -286,7 +292,13 @@ class App extends React.Component {
         <h2> Nature of work </h2>
         <div className="metric" style={{ marginTop: "40px" }}>
           <div className="content-box">
-            <div style={{ display: "inline-block", width: "100%", marginTop:"18px" }}>
+            <div
+              style={{
+                display: "inline-block",
+                width: "100%",
+                marginTop: "18px"
+              }}
+            >
               <h2> Sales </h2>
               {Nature_Of_Work[0]["Sales"].map((metric, i) => (
                 <div className="inputGroup" key={i}>
@@ -403,15 +415,31 @@ class App extends React.Component {
 
         <br />
         <div className="form-group">
-          <input type="text"  value={Gross_Pay_Of_Subordinate} onChange={this.handleChangeGross}  required="required" />
-          <label className="control-label" htmlFor="input">Gross Pay Of Subordinate</label><i className="bar"></i>
+          <input
+            type="text"
+            value={Gross_Pay_Of_Subordinate}
+            onChange={this.handleChangeGross}
+            required="required"
+          />
+          <label className="control-label" htmlFor="input">
+            Gross Pay Of Subordinate
+          </label>
+          <i className="bar" />
         </div>
 
-        <div className="form-group" >
-          <input type="text" required="required" value={Bonus} onChange={ this.handleChangeBonus} />
-          <label className="control-label" htmlFor="input">Bonus</label><i className="bar"></i>
+        <div className="form-group">
+          <input
+            type="text"
+            required="required"
+            value={Bonus}
+            onChange={this.handleChangeBonus}
+          />
+          <label className="control-label" htmlFor="input">
+            Bonus
+          </label>
+          <i className="bar" />
         </div>
-        </div>
+      </div>
     );
   }
 }
