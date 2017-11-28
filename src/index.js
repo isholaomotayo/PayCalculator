@@ -147,7 +147,7 @@ class App extends React.Component {
       parseFloat(HR_Admin) +
       parseFloat(ICT) +
       parseFloat(Bonus*1) +
-      parseFloat(Gross_Pay_Of_Subordinate*0.25) +
+      parseFloat(Gross_Pay_Of_Subordinate*0.20) +
       parseFloat(Ops)
 
     return (
